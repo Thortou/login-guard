@@ -25,8 +25,7 @@ export class UserService {
     async create(userDto: CreateUserDto): Promise<any> {
         const entity = this._userMapper.toEntity(userDto)
         entity.password = await bcript.hash(userDto.password, 10)
-        entity.roles = await this._roleRepository.getRoles(entity.roles.map((role) => role.id))
-
+        entity.roles = await this._roleRepository.getRoles(entity.roles.map((role) => role.id));
 
         const insert = await this._dataSource.getRepository(UserModel).save(entity)
         if (insert.profile) {
@@ -52,6 +51,7 @@ export class UserService {
             .leftJoinAndSelect('roles.permissions', 'permissions')
             .where('users.id = :id', { id })
             .getOne()
+            
         return result
     }
 
@@ -62,6 +62,8 @@ export class UserService {
             .leftJoinAndSelect('roles.permissions', 'permissions')
             .where('users.username = :username', { username })
             .getOne()
+
+            
 
         if (!user) throw new NotFoundException('user not found')
 

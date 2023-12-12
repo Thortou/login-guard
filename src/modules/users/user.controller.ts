@@ -4,13 +4,14 @@ import { UserModel } from "./entities/user.entity";
 import { CreateUserDto, LoginDto } from "./dtos/user.dto";
 import { AuthService } from "./auth/auth.service";
 import { Public } from "../../common/decorators/public.decorator";
+import { AuthGuard } from "./auth/auth.guard";
 import { LocalAuthGuard } from "src/common/guards/local.auth.guard";
 
 @Controller('users')
 export class UserController {
     constructor(
-        private readonly userService: UserService,
-        private readonly authService: AuthService
+        private userService: UserService,
+        private authService: AuthService
     ) { }
 
     @Public()
@@ -31,12 +32,13 @@ export class UserController {
     @Post('login')
     signIn(@Body() signInDto: LoginDto): Promise<UserModel> {
         const { username, password } = signInDto
-        return this.authService.signIn(username, password)
+        return this.authService.login(username, password)
     }
 
     // @UseGuards(AuthGuard)
-    // @Get('profile')
-    // getProfile(@Request() req) {
-    //   return req.user;
-    // }
+    // @Public()
+    @Get('profile')
+    getProfile(@Request() req) {
+      return req.user;
+    }
 }

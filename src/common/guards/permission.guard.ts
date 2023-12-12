@@ -20,13 +20,13 @@ export class PermissionGuard implements CanActivate {
     const { user } = context.switchToHttp().getRequest<{ user: UserModel }>();
     const { id } = user;
 
+    
     // Customize the output format
     const dataUser = await this.userService.findOne(id)
-
     if (!dataUser) throw new NotFoundException();
 
     if (
-      dataUser.roles.some((role) => role.name === 'admin')
+      dataUser.roles.some((role) => role.name === 'super-admin')
     )
       return true;
     return requiredPermissions.some((permission) =>

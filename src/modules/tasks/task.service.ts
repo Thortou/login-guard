@@ -11,8 +11,10 @@ export class TaskService {
         private readonly _dataSource: DataSource
     ){}
 
-    async create(createTaskDto: CreateTaskDto): Promise<any>{
-        return 'created...'
+    async create(createTaskDto: CreateTaskDto, user: any): Promise<any>{
+        console.log(user);
+        
+        return {status: 201, message: 'created...', userCreate: user.username}
     }
     async findAll(searchTask: SearchTaskDto): Promise<any>{
         return 'This is return your data in database ...'

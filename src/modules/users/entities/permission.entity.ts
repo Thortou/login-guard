@@ -12,7 +12,13 @@ export enum Permission {
     CREATE_PROFILE = 'create_profile',
     UPDATE_PROFILE = 'update_profile',
     READ_PROFILE = 'read_profile',
-    DELETE_PROFILE = 'delete_profile'
+    DELETE_PROFILE = 'delete_profile',
+    //user
+
+    CREATE_USER = 'create_user',
+    UPDATE_USER = 'update_user',
+    READ_USER = 'read_user',
+    DELETE_USER = 'delete_user'
 
 }
 @Entity({ name: 'permission' })
@@ -32,7 +38,7 @@ export class PerrmissionModel {
     create_at!: Date;
     @UpdateDateColumn()
     update_at!: Date;
-    @DeleteDateColumn()
+    @DeleteDateColumn({nullable: true})
     delete_at?: Date;
 }
 

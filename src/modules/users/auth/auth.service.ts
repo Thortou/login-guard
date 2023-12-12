@@ -10,7 +10,7 @@ export class AuthService {
     private jwtService: JwtService
     ) {}
 
-  async signIn(username: string, password: string): Promise<any> {
+  async login(username: string, password: string): Promise<any> {
     const user = await this.usersService.sigIn(username);
     if(!user)throw new UnauthorizedException('username failed...');
     if (user && await bcript.compare(password, user.password)) {
@@ -18,7 +18,7 @@ export class AuthService {
         const payload = {id: result.id, username: result.username, };
         return {
             message: 'login success',
-            access_token: await this.jwtService.signAsync(payload),
+            access_token: this.jwtService.sign(payload),
             data: result,
 
         }

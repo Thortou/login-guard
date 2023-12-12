@@ -1,17 +1,17 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinTable, ManyToMany, OneToOne, PrimaryGeneratedColumn, Relation, UpdateDateColumn } from "typeorm";
 import { RoleEntity, RoleModel } from "./role.entity";
-import { ProfileEntity, ProfileModel } from "src/modules/profiles/entities/profile.entity";
+import { ProfileEntity, ProfileModel } from "../../../modules/profiles/entities/profile.entity";
 
 @Entity({ name: 'users' })
 export class UserModel {
     @PrimaryGeneratedColumn({})
-    id: number;
-    @Column()
-    username: string;
-    @Column()
-    tel: string;
-    @Column()
-    gmail: string;
+    id!: number;
+    @Column({nullable: true})
+    username?: string;
+    @Column({nullable: true})
+    tel?: string;
+    @Column({nullable: true})
+    gmail?: string;
     @Column()
     password: string;
 
@@ -36,15 +36,15 @@ export class UserModel {
     create_at!: Date;
     @UpdateDateColumn()
     update_at!: Date;
-    @DeleteDateColumn()
+    @DeleteDateColumn({nullable: true})
     delete_at?: Date;
 }
 
 export class UserEntity {
-    id: number;
-    username: string;
-    tel: string;
-    gmail: string;
+    id!: number;
+    username?: string;
+    tel?: string;
+    gmail?: string;
     password: string;
     profile: ProfileEntity;
     roles: RoleEntity[];

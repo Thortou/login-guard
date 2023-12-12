@@ -3,6 +3,8 @@ import 'reflect-metadata';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { SeederOptions, runSeeders } from 'typeorm-extension';
 import { models } from '../model';
+import { userSeeders } from '../../../../modules/users/seed';
+import { userFactories } from '../../../../modules/users/seed/factories';
 config();
 
 const options: DataSourceOptions & SeederOptions = {
@@ -14,10 +16,10 @@ const options: DataSourceOptions & SeederOptions = {
   database: process.env.DB_DATABASE,
   entities: models,
   factories: [
-    // ...userFactories,
+    ...userFactories,
   ],
   seeds: [
-    // ...userSeeders,
+    ...userSeeders,
   ],
 };
 

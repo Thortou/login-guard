@@ -1,13 +1,13 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, Relation, UpdateDateColumn } from "typeorm";
 import { UserEntity, UserModel } from "./user.entity";
-import { PerrmissionModel } from "./permission.entity";
-
+import { PerrmissionEntity, PerrmissionModel } from "./permission.entity";
+export type RoleName = 'super-admin' | 'dev' | 'customer' | string;
 @Entity({ name: 'roles' })
 export class RoleModel {
     @PrimaryGeneratedColumn({ unsigned: true })
-    id: number;
+    id!: number;
     @Column({ type: 'varchar', length: 150 })
-    name: string;
+    name!: RoleName;
 
     @ManyToMany(() => UserModel, (user) => user.roles, {
         onDelete: 'CASCADE',
@@ -27,16 +27,16 @@ export class RoleModel {
     create_at!: Date;
     @UpdateDateColumn()
     update_at!: Date;
-    @DeleteDateColumn()
+    @DeleteDateColumn({nullable: true})
     delete_at?: Date;
 }
 
 
 export class RoleEntity {
-    id: number;
-    name: string;
+    id!: number;
+    name!: RoleName;
     users: UserEntity[]
-    permissions: PerrmissionModel[]
+    permissions: PerrmissionEntity[]
     create_at!: Date;
     update_at!: Date;
     delete_at?: Date;

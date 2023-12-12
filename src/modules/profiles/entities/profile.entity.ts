@@ -1,18 +1,18 @@
-import { UserEntity, UserModel } from "src/modules/users/entities/user.entity";
+import { UserEntity, UserModel } from "../../../modules/users/entities/user.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, Relation, UpdateDateColumn } from "typeorm";
 
 @Entity({name: 'profiles'})
 export class ProfileModel {
     @PrimaryGeneratedColumn({unsigned: true})
-    id: number;
-    @Column()
-    first_name: string;
-    @Column()
-    last_name: string;
-    @Column()
-    gender: string;
-    @Column()
-    dob: Date;
+    id!: number;
+    @Column({nullable: true})
+    first_name?: string;
+    @Column({nullable: true})
+    last_name?: string;
+    @Column({nullable: true})
+    gender?: string;
+    @Column({nullable: true})
+    dob?: Date;
     @Column({ nullable: true })
     user_id?: number;
   
@@ -27,15 +27,15 @@ export class ProfileModel {
     create_at!: Date;
     @UpdateDateColumn()
     update_at!: Date;
-    @DeleteDateColumn()
+    @DeleteDateColumn({nullable: true})
     delete_at?: Date;
 }
 export class ProfileEntity {
-    id: number;
-    first_name: string;
-    last_name: string;
-    gender: string;
-    dob: Date;
+    id!: number;
+    first_name?: string;
+    last_name?: string;
+    gender?: string;
+    dob?: Date;
     user?: UserEntity;
     create_at!: Date;
     update_at!: Date;

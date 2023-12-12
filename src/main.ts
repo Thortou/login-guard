@@ -10,6 +10,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   const config = app.get(ConfigService<IEnv>)
   app.setGlobalPrefix('api')
+  
   await app.listen(config.get('SERVER_PORT'));
 }
 bootstrap();

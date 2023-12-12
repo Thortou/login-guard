@@ -24,7 +24,6 @@ export class CreateUserDto {
     first_name: string;
     @IsNotEmpty()
     @IsString()
-    @Length(6)
     last_name: string;
     @IsNotEmpty()
     @IsString()
@@ -32,7 +31,7 @@ export class CreateUserDto {
     dob: Date;
 
     @IsArray()
-    @IsNumber()
+    // @IsNumber()
     role_id: number[];
 }
 
